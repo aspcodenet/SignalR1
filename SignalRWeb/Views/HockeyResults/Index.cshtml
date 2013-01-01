@@ -1,0 +1,10 @@
+﻿@model SignalRWeb.ViewModels.GamesListViewModel
+
+
+<h2>List of active hockey games</h2>
+@foreach(var game in Model.Games)
+{
+    @Html.ActionLink(game.Home.Name + " vs " + game.Away.Name,"ShowGame",new {gameid = game.ID})
+    <br />
+}
+

@@ -1,0 +1,35 @@
+﻿@model SignalRWeb.ViewModels.ShowGameViewModel
+
+
+<h2>@Model.Game.Home.Name vs @Model.Game.Away.Name</h2>
+
+<pre id="resultbox"></pre>
+
+<div>
+    To send some result to this from the server run PushResults @Model.Game.ID " text "
+</div>
+
+<script type="text/javascript">
+    //client
+
+
+    $(function () {
+
+        var hockey = $.connection.hockeyHub;  // generate the client-side hub proxy { Initialized to Exposed Hub }
+
+        $.connection.hub.start().done(function () {
+            hockey.server.join('@Model.Game.ID');
+        });
+
+
+        hockey.client.add = function (message) {
+            $('#resultbox').append('<br />' + message);
+        };
+
+
+
+
+
+    });
+
+</script>
